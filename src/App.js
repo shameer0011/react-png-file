@@ -5,6 +5,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       file: null,
+      token: false,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -13,11 +14,18 @@ class App extends React.Component {
       file: URL.createObjectURL(event.target.files[0]),
     });
   }
+  submitButton = () => {
+    this.setState({
+      token: true,
+    });
+    console.log(this.state.token);
+  };
   render() {
     return (
       <div>
         <input type="file" onChange={this.handleChange} />
-        <img src={this.state.file} />
+        <button onClick={this.submitButton}>Submit</button>
+        {this.state.token && <img src={this.state.file} />}
       </div>
     );
   }
